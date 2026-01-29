@@ -24,14 +24,6 @@ def _open_inline_map(lat: float, lon: float, *, api_key: str | None = None, inli
 
     if inline_mode == "iframe":
         display(IFrame(_google_maps_embed_url(lat, lon, api_key=api_key), width=900, height=600))
-    elif inline_mode == "folium":
-        try:
-            import folium
-        except Exception as exc:  # pragma: no cover - optional dependency
-            raise RuntimeError("folium is required for inline_mode='folium'.") from exc
-        m = folium.Map(location=[lat, lon], zoom_start=16)
-        folium.Marker([lat, lon]).add_to(m)
-        display(m)
     else:
         raise ValueError("inline_mode must be 'iframe' or 'folium'.")
 
