@@ -112,3 +112,25 @@ def _(coords: set, *, open_in: str = "browser", api_key: str | None = None, inli
 def _(coords: Point, *, open_in: str = "browser", api_key: str | None = None, inline_mode: str = "iframe"):
     _open_coord(coords.y, coords.x, open_in=open_in, api_key=api_key, inline_mode=inline_mode)
 # # # # # # # # # # # # #
+
+
+def open_google_maps_from_geodf(
+    gdf,
+    *,
+    geometry_column: str = "geometry",
+    open_in: str = "browser",
+    api_key: str | None = None,
+    inline_mode: str = "iframe",
+):
+    """Open Google Maps for each POINT geometry in a GeoDataFrame."""
+    if geometry_column not in gdf.columns:
+        raise ValueError(f"GeoDataFrame is missing '{geometry_column}' column.")
+
+    points = gdf[geometry_column].tolist()
+    if len(points) > 50:
+        raise ValueError("Refusing to open more than 50 Google Maps links.")
+
+    for point in points:
+        if not isinstance(point, Point):
+            raise TypeError(f"Expected Point geometries, got {type(point)}")
+        _open_coord(point.y, point.x, open_in=open_in, api_key=api_key, inline_mode=inline_mode)
