@@ -34,10 +34,24 @@ def numpy_haversine_function(arr: np.ndarray):
     arr = np.sin(arr / 2) ** 2
     return arr
 
-def get_nearest_node_index(nodes_df, point: tuple = START) -> int:
-    '''Get nearest node to a given point (lat, lon) using numpy for speed'''
+def get_nearest_node_row_id(nodes_df, point: tuple = START) -> int:
+    '''Get the row number in nodes_df of nearest node to a given point (lat, lon) using numpy for speed'''
     arr = nodes_df[['lat', 'lon']].values
     distances = numpy_haversine_distance(arr, point)
     return np.argmin(distances)
+
+    
+def get_nearest_node_uid(nodes_df, point: tuple = START, return_row_id=False) -> int:
+    '''Get the uid nearest node to a given point (lat, lon) using numpy for speed.
+    '''
+    row_id = get_nearest_node_row_id(nodes_df, point=point)
+    if nodes_df.index.name == 'id':
+        uid = nodes_df.iloc[row_id].name
+    elif 'id' in nodes_df.columns:
+        uid = nodes_df.iloc[row_id].id
+    else:
+        raise Exception("Need an id column or id as index")
+    return uid, row_id if return_row_id else uid
+
 
 
