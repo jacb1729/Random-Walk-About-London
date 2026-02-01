@@ -9,6 +9,8 @@ Go to the `notebook.ipynb` now!
 - `geopandas` - geospatial data handling
 - `numpy` - numerical computations
 - `matplotlib` - visualization
+- `multipledispatch` - tooling nicety
+- `scipy` - studying distance discrepancies
 - Footwear (culturally advised)
 
 ## Progress
@@ -18,18 +20,13 @@ Work that's currently done:
 - Getting the geodesic distance between two points (efficiently)
 - Choosing a start node based on given latitude-longitude
 - Exploration tool - inline gmap links
+- Checking the given lengths against geodesic lengths
 
 Files: 
 - `README.md` (project overview)
 - `distances.py` (geodesic distance utilities)
 - `data_and_validation_due_diligence.ipynb` (data validation)
 - `notebook.ipynb` (main demo space)
-
-
-Coming up
-- Checking the given lengths against geodesic lengths
-- Explore directionality of Edges GeoDF
-- If all is directed, implement a random walk algorithm which walks a given distance
 
 Extension ideas
 - Get building data for applications
