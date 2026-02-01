@@ -31,3 +31,4 @@ Files:
 Extension ideas
 - Get building data for applications
 - Random walks...to cafes? How likely are you to walk a desired length and ensure that you end up in a cafe?
+- Topological study. Take a neighbourhood around the path traversed, and check out how much of the area of London you cover as a function of distance.
